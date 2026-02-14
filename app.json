@@ -1,0 +1,47 @@
+{
+  "name": "Mirror Leech Telegram Bot",
+  "description": "A Telegram bot for mirroring/leeching files to Google Drive, Telegram, and rclone remotes.",
+  "repository": "https://github.com/anasty17/mirror-leech-telegram-bot",
+  "stack": "container",
+  "env": {
+    "BOT_TOKEN": {
+      "description": "The Telegram Bot Token from @BotFather",
+      "required": true
+    },
+    "OWNER_ID": {
+      "description": "The Telegram User ID of the owner",
+      "required": true
+    },
+    "TELEGRAM_API": {
+      "description": "The Telegram API ID from https://my.telegram.org",
+      "required": true
+    },
+    "TELEGRAM_HASH": {
+      "description": "The Telegram API Hash from https://my.telegram.org",
+      "required": true
+    },
+    "GDRIVE_ID": {
+      "description": "Google Drive Folder ID or 'root'. Required if DEFAULT_UPLOAD is 'gd'.",
+      "required": false
+    },
+    "DEFAULT_UPLOAD": {
+      "description": "'rc' for Rclone, 'gd' for Google Drive.",
+      "value": "rc",
+      "required": false
+    },
+    "UPSTREAM_REPO": {
+      "description": "Upstream Repository URL for updates.",
+      "value": "https://github.com/anasty17/mirror-leech-telegram-bot",
+      "required": false
+    },
+    "UPSTREAM_BRANCH": {
+      "description": "Upstream Branch for updates.",
+      "value": "master",
+      "required": false
+    },
+    "DATABASE_URL": {
+      "description": "MongoDB Connection String. Recommended for saving settings.",
+      "required": false
+    }
+  }
+}
