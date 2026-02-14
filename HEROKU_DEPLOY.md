@@ -60,5 +60,9 @@ This repository is configured for deployment on Heroku using Docker.
 **Answer:** **No.**
 Downloading from Mega.nz requires downloading the file to the local disk first before uploading it to the destination (Google Drive or Telegram). Due to Heroku's 500MB disk limit, downloading a 50-100GB file is impossible on Heroku.
 
+### Q: Can the bot download files one by one from a folder, upload them, and delete them to save space?
+**Answer:** **No.**
+The bot is designed to download the entire task (whether it's a single file or a folder) *completely* before starting the upload process. It does not support streaming or pipelining files one by one. Therefore, the **total size of the task** (the sum of all files in a folder) must fit within the disk limit (approx. 500MB on Heroku).
+
 ### Solution for Large Files
 To handle large files (50-100GB) from Mega or for non-server-side Google Drive transfers, you must deploy this bot on a **VPS** (Virtual Private Server) with sufficient disk space (e.g., 200GB+ Storage). Heroku is not suitable for this specific high-storage use case.
