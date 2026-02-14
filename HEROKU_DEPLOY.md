@@ -64,5 +64,22 @@ Downloading from Mega.nz requires downloading the file to the local disk first b
 **Answer:** **No.**
 The bot is designed to download the entire task (whether it's a single file or a folder) *completely* before starting the upload process. It does not support streaming or pipelining files one by one. Therefore, the **total size of the task** (the sum of all files in a folder) must fit within the disk limit (approx. 500MB on Heroku).
 
-### Solution for Large Files
-To handle large files (50-100GB) from Mega or for non-server-side Google Drive transfers, you must deploy this bot on a **VPS** (Virtual Private Server) with sufficient disk space (e.g., 200GB+ Storage). Heroku is not suitable for this specific high-storage use case.
+## Summary of Bot Process & Limits on Heroku
+
+### The Process (For non-Server-Side Copy tasks)
+For direct downloads (Mega, direct links, torrents) and uploading to Telegram/Drive/Rclone:
+1.  **Download:** The **entire** content of the link (file or folder) is downloaded to the bot's local storage.
+2.  **Process:** (Optional) Extraction, zipping, or splitting happens on the local storage.
+3.  **Upload:** The processed files are uploaded to the destination.
+4.  **Clean:** The local files are deleted.
+
+### The Limits
+*   **Disk Limit:** Approximately **500MB** (Heroku Ephemeral Filesystem).
+*   **Consequence:** Any task larger than 500MB involving local storage will fail ("Disk Full" error).
+
+### Exceptions
+*   **Google Drive Server-Side Copy (Clone):** Does *not* use local disk space. You can copy files larger than 500MB between Drives.
+*   **Rclone Server-Side Copy:** Some Rclone remotes support server-side copy without downloading. Check Rclone documentation.
+
+### Recommendation
+For tasks exceeding 500MB (like 50-100GB Mega/Drive downloads), **use a VPS** (Virtual Private Server) with sufficient disk space (e.g., 200GB+ Storage). Heroku is not suitable for this specific high-storage use case.
